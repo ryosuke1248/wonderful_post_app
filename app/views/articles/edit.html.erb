@@ -1,0 +1,16 @@
+<%
+=begin%>
+ <%= t ".title", user_name: current_user.full_name %> 
+<%
+=end%>
+<h1>記事編集</h1>
+
+
+
+
+<%= render partial: 'layouts/navbar' %>
+
+<%= render 'form', article: @article %>
+
+<%= link_to 'Show', @article %> |
+<%= link_to 'Back', articles_path %>

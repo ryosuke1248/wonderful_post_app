@@ -1,0 +1,49 @@
+
+<%
+=begin%>
+ <p id="notice"><%= notice %></p> 
+<%
+=end%>
+
+
+<%= render partial: 'layouts/navbar' %>
+<h1> 記事</h1>
+<%= render partial:"search" %>
+
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">タイトル</th>
+      <th scope="col">本文</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @articles.each do |article| %>
+  <% if !user_signed_in? %>
+      <tr>
+        <td>
+          <%= article.title %>
+          <% article.tags.each do |tag| %>
+            <span class="badge rounded-pill bg-primary"><%= tag.name %></span>
+          <% end %>
+      </td>
+        <td><%= article.content %></td>
+        <td><%= link_to '詳細', article, class:"btn btn-success"%></td>
+      </tr>
+    <% elsif article.user ==  current_user %>
+      <tr>
+        <td><%= article.title %></td>
+        <td><%= article.content %></td>
+        <td><%= link_to '詳細', article, class:"btn btn-success"%></td>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+        <%= paginate @articles %>
+
+<br>
+
+<%= link_to 'TOPへ', articles_path, class: "btn btn-info" %>

@@ -1,0 +1,28 @@
+<%
+=begin%>
+ <p id="notice"><%= notice %></p> 
+<%
+=end%>
+
+
+<div class="card">
+  <div class="card-header">
+    <%= @article.title %>
+      <% @article.tags.each do |tag| %>
+        <span class="badge rounded-pill bg-primary"><%= tag.name%></span>
+      <% end %>
+  </div>
+  <div class="card-body">
+    <%= @article.content %>
+  </div>
+</div>
+
+<p></p>
+
+
+<% if current_user.id == @article.user_id %>
+<%= link_to '編集', edit_article_path(@article),  class:"btn btn-warning" %> 
+<% end %>
+
+<%= link_to '一覧', articles_path, class: "btn btn-secondary" %>
+<%= link_to 'TOPへ', articles_path, class: "btn btn-info" %>
